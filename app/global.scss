@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-@import url('http://fonts.cdnfonts.com/css/road-rage');
-@import url('https://fonts.cdnfonts.com/css/nuixyber');
 
 $abel: 'Abel', 'Agency FB';
 
 @layer base {
+  @font-face {
+    font-family: 'OriginTech';
+    src: url('https://res.cloudinary.com/drixmykpt/raw/upload/v1724573420/spacestation/originfont.woff') format('woff');
+  }
   * {
     box-sizing: border-box;
   }
@@ -22,14 +24,9 @@ $abel: 'Abel', 'Agency FB';
     overflow: hidden;
   }
 
-  @font-face {
-    font-family: OriginTech;
-    src: url('https: //res.cloudinary.com/drixmykpt/raw/upload/v1724573420/spacestation/originfont');
-  }
-
   body {
     background: #000; //#000;
-    font-family: 'Road Rage', $abel;
+    font-family: 'OriginTech', $abel;
   }
 
   .small-picker .react-colorful {
@@ -44,8 +41,6 @@ $abel: 'Abel', 'Agency FB';
 
   .text {
     font-size: 6rem;
-    font-family: 'Road Rage', $abel, 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
-      sans-serif;
     margin: auto;
   }
 
@@ -56,7 +51,6 @@ $abel: 'Abel', 'Agency FB';
     min-height: 100vh;
     background: black;
     min-width: 100vw;
-    /* animation: animateBg 10s linear infinite; */
   }
 
   @keyframes animateBg {
@@ -123,7 +117,6 @@ $abel: 'Abel', 'Agency FB';
     text-align: center;
     color: rgb(75, 219, 212);
     filter: drop-shadow(0 0 40px white);
-    font-family: 'OriginTech', 'nuixyber', 'Abel', sans-serif;
     font-size: 70px;
     letter-spacing: 4px;
     text-shadow: 0px 0px 10px white;

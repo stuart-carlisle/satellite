@@ -57,7 +57,6 @@ const ModeToggle = () => {
             >
               <div
                 style={{
-                  fontFamily: 'OriginTech',
                   filter: `drop-shadow(1px 1px 3px rgba(255,255,255,0.5))`,
                   fontSize: '11px',
                   position: 'absolute',
