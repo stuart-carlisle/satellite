@@ -1,0 +1,14 @@
+$desktop: 1000px;
+$tablet: 600px;
+
+.arrow{
+  filter: drop-shadow(3px 3px 9px rgba(255, 255, 255, 0.5));
+  opacity: 0.3;
+  transition: opacity 1s ease;
+}
+
+.arrow:hover{
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 1s ease;
+}

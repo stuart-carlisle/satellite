@@ -1,0 +1,51 @@
+$desktop: 1000px;
+$tablet: 600px;
+.toggle{
+    position: absolute;
+    left: 10px;
+    bottom: 30px;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+    .toggleTwo {
+      position: absolute;
+      right: 10px;
+      bottom: 30px;
+  
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+.container{
+    //@media (min-width: $tablet ) and (max-width: $desktop) 
+  
+    // @media (max-width: $tablet) {
+    //     font-size: 8px;
+    // }
+    color:white;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    //font-family: 'Abel'
+}
+
+.left{
+    filter: drop-shadow(2px 2px 2px rgba(255,255,255,0.5));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    margin: 5px 0 0 5px;
+}
+
+.right {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(2px 2px 2px rgba(255,255,255, 0.5));
+  margin: 5px 0 0 5px;
+}
