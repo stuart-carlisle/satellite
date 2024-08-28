@@ -1,7 +1,7 @@
 'use client'
 
 import React, { Suspense, useEffect, useRef, useMemo, useState } from 'react'
-import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import {
   PositionalAudio,
   Float,
@@ -13,9 +13,11 @@ import {
   useAnimations,
   useProgress,
   Stars,
+  Html,
+  useTexture,
 } from '@react-three/drei'
 import * as THREE from 'three'
-import { a, useSpring } from '@react-spring/three'
+import { a, config, useSpring } from '@react-spring/three'
 import { EffectComposer, Bloom, DepthOfField, Vignette, Glitch, Scanline } from '@react-three/postprocessing'
 import { KernelSize, GlitchMode } from 'postprocessing'
 import useSound from 'use-sound'
@@ -25,7 +27,10 @@ import state from '@/state/stateSatellite'
 import Loading from '@/components/satellite/Loading'
 import SoundButton from '@/components/satellite/SoundButton'
 import LaunchButton from '@/components/satellite/LaunchButton'
-import ArrowStyles from '@/components/satellite/Arrow.module.scss'
+import { useKeyDown } from '@/hooks/useKeyDown'
+import Cards from '@/components/satellite/Cards'
+import PicturesButton from '@/components/satellite/PicturesButton'
+import Arrow from '@/components/satellite/Arrow'
 
 const AnimatedText = a(Text)
 
@@ -37,6 +42,7 @@ const Dolly = () => {
   const brainPosition = new THREE.Vector3(-0, 5, -4)
   const gamePosition = new THREE.Vector3(-0.5, 0.8, 9)
   //update camera positions when doing zoom animations
+
   useFrame(() => {
     if (snap.infoPage === 1) {
       camera.position.lerp(microBitPosition, 0.05)
@@ -218,6 +224,7 @@ const Doors = () => {
   useMemo(() => {
     if (scene) {
       state.mounted = true
+      state.sound = true
     }
   }, [scene])
   return (
@@ -227,10 +234,10 @@ const Doors = () => {
         <mesh geometry={nodes.Tree.geometry} position={nodes.Tree.position} rotation={nodes.Tree.rotation}>
           <meshBasicMaterial color={'#e342d8'} />
         </mesh>
-        <pointLight ref={pointLightOne} color={'yellow'} intensity={10} position={[0, -2.8, -35]} />
-        <pointLight ref={pointLightTwo} color={'hotpink'} intensity={10} position={[0, -5, -35]} />
-        <pointLight ref={pointLightThree} color={'#428de3'} intensity={10} position={[0, 0, -35]} />
-        <pointLight color={'white'} intensity={80} position={[0, 0, -35]} />
+        <pointLight ref={pointLightOne} color={'yellow'} intensity={100} position={[0, -2.8, -35]} />
+        <pointLight ref={pointLightTwo} color={'hotpink'} intensity={100} position={[0, -5, -35]} />
+        <pointLight ref={pointLightThree} color={'#428de3'} intensity={100} position={[0, 0, -35]} />
+        {/* <pointLight color={'white'} intensity={0} position={[0, 0, -35]} /> */}
         <ambientLight color={'white'} intensity={2} />
       </group>
     </Float>
@@ -262,7 +269,7 @@ const Audio = () => {
           <PositionalAudio
             ref={startAudio}
             url='https://res.cloudinary.com/drixmykpt/video/upload/v1724573439/spacestation/startaudio.mp3'
-            distance={1}
+            distance={0.1}
             autoplay
             loop
           />
@@ -312,87 +319,6 @@ const Audio = () => {
           </group>
         }
       </group>
-    )
-  )
-}
-
-const Arrow = () => {
-  const snap = useSnapshot(state)
-  const onClick = () => {
-    if (snap.infoPage === null) {
-      state.fly = false
-      state.infoPage = 1
-      state.stars = false
-      return
-    }
-    if (snap.infoPage < 3) {
-      state.fly = false
-      state.infoPage++
-      state.stars = false
-      return
-    }
-    if (snap.infoPage === 3) {
-      state.infoPage = null
-      state.fly = true
-      state.stars = true
-      return
-    }
-  }
-
-  return (
-    snap.startAnimation && (
-      <div
-        style={{
-          position: 'absolute',
-          margin: '0 0px 0 0',
-          height: '80px',
-          top: '50%',
-          transform: 'translate(0, -50%)',
-          right: 0,
-        }}
-        onClick={onClick}
-      >
-        <svg
-          className={ArrowStyles.arrow}
-          width='120'
-          height='120'
-          viewBox='0 0 20 20'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <filter id='Bevel' filterUnits='objectBoundingBox' x='-10%' y='-10%' width='150%' height='150%'>
-            <feGaussianBlur in='SourceAlpha' stdDeviation='0.5' result='blur' />
-            <feSpecularLighting
-              in='blur'
-              surfaceScale='5'
-              specularConstant='0.5'
-              specularExponent='9'
-              result='specOut'
-              lightingColor='white'
-            >
-              <fePointLight x='-5000' y='-10000' z='0000' />
-            </feSpecularLighting>
-            <feComposite in='specOut' in2='SourceAlpha' operator='in' result='specOut2' />
-            <feComposite
-              in='SourceGraphic'
-              in2='specOut2'
-              operator='arithmetic'
-              k1='0'
-              k2='1'
-              k3='1'
-              k4='0'
-              result='litPaint'
-            />
-          </filter>
-          <path
-            d='M6 11L6 4L10.5 7.5L6 11Z'
-            stroke='#967435'
-            strokeWidth={0.5}
-            fill='#222'
-            filter={'url(#Bevel)'}
-          ></path>
-        </svg>
-      </div>
     )
   )
 }
@@ -473,7 +399,6 @@ const MenuObjects = () => {
     opacity: snap.infoPage === 3 ? 1 : 0,
     position: snap.infoPage === 3 ? [0.3, 0.6, 6] : [0.3, 0.6, 3],
   })
-  console.log(nodes)
   useFrame(() => {
     brain.current.rotation.y += 0.05
     micro.current.rotation.y += 0.05
@@ -513,8 +438,14 @@ const MenuObjects = () => {
           }
           <a.meshBasicMaterial attach='material' color={'black'} opacity={microProps.opacity} depthWrite transparent />
         </AnimatedText>
+        {snap.infoPage === 1 && (
+          <Html>
+            <Cards />
+          </Html>
+        )}
       </a.group>
       <a.group position={gamesProps.position}>
+        <FlightInstructions />
         <group ref={games} position={[0, 0, 0.4]}>
           <a.mesh geometry={nodes.Mario.geometry}>
             <a.meshStandardMaterial {...nodes.Mario.material} transparent depthWrite opacity={gamesProps.opacity} />
@@ -538,6 +469,11 @@ const MenuObjects = () => {
           {'We are going to use Scratch to make some 2d games and other text based languages to make 3d games'}
           <a.meshBasicMaterial attach='material' color={'black'} opacity={gamesProps.opacity} depthWrite transparent />
         </AnimatedText>
+        {snap.infoPage === 3 && (
+          <Html>
+            <Cards />
+          </Html>
+        )}
       </a.group>
       <a.group scale={[0.57, 0.57, 0.57]} rotation={[deg(60), deg(10), deg(-10)]} position={brainProps.position}>
         <a.mesh ref={brain} geometry={nodes.Brain.geometry} position={[0.3, 0, 0]}>
@@ -570,16 +506,58 @@ const MenuObjects = () => {
               transparent
             />
           </AnimatedText>
+          {snap.infoPage === 2 && (
+            <Html>
+              <Cards />
+            </Html>
+          )}
         </group>
       </a.group>
     </>
   )
 }
 
+const FlightInstructions = () => {
+  const snap = useSnapshot(state)
+  const [colorMap, normalMap] = useTexture([
+    'https://res.cloudinary.com/drixmykpt/image/upload/v1724862862/spacestation/controls.png',
+    'https://res.cloudinary.com/drixmykpt/image/upload/v1724862858/spacestation/normalmap.png',
+  ])
+  const instructionProps = useSpring({
+    opacity: snap.instructions ? 1 : 0,
+    position: snap.instructions ? [-0.7, 0, 4] : [-0.7, 3, 4],
+    config: config.molasses,
+  })
+
+  const onKey = () => {
+    if (snap.fly) {
+      state.instructions = false
+    }
+  }
+
+  useKeyDown(() => {
+    onKey()
+  }, ['w', 'a', 's', 'd'])
+
+  return (
+    <a.mesh position={instructionProps.position} rotation={[-Math.PI / 8, 0, 0]}>
+      <a.planeGeometry args={[1.8, 0.9]} />
+      <a.meshStandardMaterial
+        normalScale={2}
+        map={colorMap}
+        normalMap={normalMap}
+        transparent
+        depthWrite
+        opacity={instructionProps.opacity}
+      />
+    </a.mesh>
+  )
+}
+
 export default function App() {
   return (
     <>
-      <Canvas>
+      <Canvas legacy={true}>
         <Suspense fallback={null}>
           <ambientLight intensity={1} />
           <CameraRig />
@@ -598,6 +576,7 @@ export default function App() {
           <Audio />
         </Suspense>
       </Canvas>
+      <PicturesButton />
       <FixedAudio />
       <Loading />
       <SoundButton />
@@ -607,8 +586,8 @@ export default function App() {
   )
 }
 
-useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617742/spacestation/comp/satellite.glb')
-useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617732/spacestation/comp/camera.glb')
-useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617734/spacestation/comp/doors.glb')
-useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617745/spacestation/comp/rotatinglogo.glb')
-useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617730/spacestation/comp/brain.glb')
+// useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617742/spacestation/comp/satellite.glb')
+// useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617732/spacestation/comp/camera.glb')
+// useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617734/spacestation/comp/doors.glb')
+// useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617745/spacestation/comp/rotatinglogo.glb')
+// useGLTF.preload('https://res.cloudinary.com/drixmykpt/image/upload/v1724617730/spacestation/comp/brain.glb')

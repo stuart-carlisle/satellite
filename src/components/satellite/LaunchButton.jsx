@@ -28,7 +28,6 @@ const ModeToggle = () => {
     height: '60px',
     borderRadius: '50%',
     background: '#222',
-    filter: `drop-shadow(1px 1px 3px rgba(255,255,255,0.5))`,
     boxShadow: `inset 0px 0px 3px 1px rgba(0,0,0,0.5)`,
     border: '#967435 2px solid',
     config: { bounce: true, mass: 4, tension: 400, friction: 50 },
@@ -43,7 +42,7 @@ const ModeToggle = () => {
         className={styles.container}
         style={{ color: '#fff' }}
       >
-        <a.div style={stylesSlider}>
+        <a.div style={stylesSlider} className={styles.slider}>
           <a.div style={stylesButton}>
             <div
               style={{

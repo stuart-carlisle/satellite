@@ -1,0 +1,31 @@
+.container {
+  background: lightblue;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+.deck {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.deck > div {
+  background-color: white;
+  background-size: auto 90%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 60vh;
+  height: 40vh;
+  will-change: transform;
+  border-radius: 10px;
+  box-shadow:
+    0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
+    0 10px 10px -10px rgba(50, 50, 73, 0.3);
+}

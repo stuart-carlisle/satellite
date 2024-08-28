@@ -1,14 +1,73 @@
 $desktop: 1000px;
 $tablet: 600px;
 
-.arrow{
+.arrow {
   filter: drop-shadow(3px 3px 9px rgba(255, 255, 255, 0.5));
   opacity: 0.3;
   transition: opacity 1s ease;
 }
 
-.arrow:hover{
-  cursor: pointer;
+.arrow:hover {
+  // cursor: pointer;
   opacity: 1;
   transition: opacity 1s ease;
+}
+
+.arrowSvg {
+  transform: rotateZ(180deg);
+  position: relative;
+  opacity: 1;
+  transition: opacity 1s ease;
+  margin-right: 10px;
+  .arrowPath2 {
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+  }
+  &:hover {
+    cursor: pointer;
+    .arrowPath2 {
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+  }
+}
+
+.arrowInnerContainer {
+  margin: auto;
+}
+
+.arrowOuterContainer {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrowPath {
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.5));
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 2;
+  animation: arrow 1.5s forwards infinite ease-in-out;
+}
+
+.arrowPath2 {
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.5));
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 3;
+}
+
+@keyframes arrow {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
 }
