@@ -5,7 +5,7 @@ import { useSnapshot } from 'valtio'
 import state from '@/state/stateSatellite'
 import styles from './SoundButton.module.scss'
 
-const ModeToggle = () => {
+const SoundButton = () => {
   const snap = useSnapshot(state)
   const stylesButton = useSpring({
     left: '50%',
@@ -16,7 +16,7 @@ const ModeToggle = () => {
     borderRadius: '50%',
     border: '#967435 2px solid',
     background: '#222',
-    transform: `scale(${snap.sound ? 0.85 : 0.9})`,
+    transform: `scale(${snap.firstSound && snap.sound ? 0.85 : 0.9})`,
     transformOrigin: `center`,
     boxShadow: 'inset 0px 3px 2px 1px rgba(255,255,255,0.5)',
     margin: '-30px 0 0 -30px',
@@ -97,4 +97,4 @@ const ModeToggle = () => {
   )
 }
 
-export { ModeToggle as default }
+export { SoundButton as default }

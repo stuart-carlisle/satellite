@@ -62,7 +62,7 @@ function Deck() {
     if (!down && trigger) {
       gone.add(index)
       setTimeout(() => {
-        snap.sound && playSwipe()
+        snap.sound && snap.firstSound && playSwipe()
       }, 100)
     } // If button/finger's up and trigger velocity is reached, we flag the card ready to fly out
     api.start((i) => {
@@ -110,13 +110,13 @@ function Deck() {
 
 export default function App() {
   const snap = useSnapshot(state)
-  const [play] = useSound('https://res.cloudinary.com/drixmykpt/video/upload/v1724862647/spacestation/shuffle.mp3', {
-    volume: 1,
+  const [play] = useSound('https://res.cloudinary.com/drixmykpt/video/upload/v1725179800/spacestation/cards.mp3', {
+    volume: 0.3,
   })
   if (snap.picturesMicro || snap.picturesBrain || snap.picturesGame) {
     setTimeout(() => {
-      snap.sound && play()
-    }, 300)
+      snap.sound && snap.firstSound && play()
+    }, 100)
   }
   return (
     (snap.picturesMicro || snap.picturesBrain || snap.picturesGame) && (
