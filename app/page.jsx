@@ -16,8 +16,8 @@ import Effects from '@/components/satellite/Effects'
 import FixedAudio from '@/components/satellite/FixedAudio'
 import Loader from '@/components/satellite/Loader'
 import MenuObjects from '@/components/satellite/MenuObjects'
-import RotatingLogo from '@/components/satellite/RotatingLogo'
-import SpaceStation from '@/components/satellite/SpaceStation'
+// import RotatingLogo from '@/components/satellite/RotatingLogo'
+import SpaceStation from '@/components/satellite/Spacestationwharton'
 
 export default function App() {
   return (
@@ -34,7 +34,7 @@ export default function App() {
           <SpaceStation />
           <Doors />
           <MenuObjects />
-          <RotatingLogo />
+          {/* <RotatingLogo /> */}
           <Effects />
           <Loader />
           <Dolly />

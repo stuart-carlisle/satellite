@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 
 const SpaceStation = () => {
   const { nodes, animations } = useGLTF(
-    'https://res.cloudinary.com/drixmykpt/image/upload/v1724617742/spacestation/comp/satellite.glb',
+    'spacestationwharton-transformed.glb'//'https://res.cloudinary.com/drixmykpt/image/upload/v1724617742/spacestation/comp/satellite.glb',
   )
   const { actions } = useAnimations(animations, nodes['Sketchfab_Scene'])
   const group = useRef()

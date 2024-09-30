@@ -24,6 +24,7 @@ const brainCards = [
 
 const gameCards = [
   'https://res.cloudinary.com/drixmykpt/image/upload/v1724874615/spacestation/menuImages/Games2.jpg',
+  'https://res.cloudinary.com/drixmykpt/image/upload/v1727725756/spacestation/menuImages/Games5.jpg',
   'https://res.cloudinary.com/drixmykpt/image/upload/v1724874615/spacestation/menuImages/Games3.jpg',
   'https://res.cloudinary.com/drixmykpt/image/upload/v1724874614/spacestation/menuImages/Games1.jpg',
   'https://res.cloudinary.com/drixmykpt/image/upload/v1724874617/spacestation/menuImages/Games4.jpg',

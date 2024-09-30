@@ -9,7 +9,7 @@ const Doors = () => {
   const snap = useSnapshot(state)
   const group = useRef()
   const { animations, nodes, scene } = useGLTF(
-    'https://res.cloudinary.com/drixmykpt/image/upload/v1725178038/spacestation/comp/doors2.glb',
+    'https://res.cloudinary.com/drixmykpt/image/upload/v1727729943/spacestation/comp/doors2wharton.glb',
   )
   const { actions } = useAnimations(animations, scene)
   const pointLightOne = useRef()
@@ -81,9 +81,9 @@ const Doors = () => {
     <Float floatIntensity={2} floatingRange={[-0.05, 0.05]} rotationIntensity={0.1}>
       <group ref={group}>
         <primitive object={scene} />
-        <mesh geometry={nodes.Tree.geometry} position={nodes.Tree.position} rotation={nodes.Tree.rotation}>
+        {/*<mesh geometry={nodes.Tree.geometry} position={nodes.Tree.position} rotation={nodes.Tree.rotation}>
           <meshBasicMaterial color={'#e342d8'} />
-        </mesh>
+        </mesh>*/}
         <pointLight ref={pointLightOne} color={'yellow'} intensity={100} position={[0, -2.2, -35]} />
         <pointLight ref={pointLightTwo} color={'hotpink'} intensity={100} position={[0, -0, -35]} />
         <pointLight ref={pointLightThree} color={'#428de3'} intensity={100} position={[0, 0, -35]} />
