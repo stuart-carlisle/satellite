@@ -98,7 +98,7 @@ const MenuObjects = () => {
           rotation={[0, deg(20), 0]}
           position={[-1.3, 0, 0.3]}
         >
-          {'We are going to use Scratch to make some 2d games and other text based languages to make 3d games'}
+          {'We are going to use Scratch to make some 2d games and HatchVR to make 3d games'}
           <a.meshBasicMaterial attach='material' color={'black'} opacity={gamesProps.opacity} depthWrite transparent />
         </AnimatedText>
         {snap.infoPage === 3 && (

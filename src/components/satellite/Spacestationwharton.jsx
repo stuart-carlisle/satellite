@@ -23,7 +23,7 @@ const SpaceStation = (props) => {
     }
   }, [actions])
   return (
-    <group ref={group} {...props} dispose={null} position={[0,-0.5,0]}>
+    <group ref={group} {...props} dispose={null} position={[0,-0.5,0]} onClick={() => window.location.href = 'https://kids.hatchxr.com/@StuartC/projects/G25-FC-S4?utm_source=copy&utm_campaign=standard&utm_medium=dashboard'}>
       <group name="Scene">
         <group name="GLTF_SceneRootNode" rotation={[-0.46, -0.06, 0.214]} scale={2.701}>
           <group name="SpaceStation001_low_1">

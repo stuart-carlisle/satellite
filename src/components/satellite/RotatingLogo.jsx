@@ -19,7 +19,7 @@ const RotatingLogo = () => {
     }
   }, [actions])
   return (
-    <group position={[-0.1, -0.3, -0.6]}>
+    <group position={[-0.1, -0.3, -0.6]} >
       <primitive ref={rotatingLogo} object={scene} />
     </group>
   )
